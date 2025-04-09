@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f5f5;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #000000, #1d1d1f);
+            color: #ffffff;
+            position: relative;
+        }
+        header h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        header p {
+            font-size: 24px;
+            font-weight: 300;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        .content {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-top: -40px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-top: 40px;
+            padding-bottom: 10px;
+        }
+        p {
+            font-size: 17px;
+            font-weight: 400;
+            color: #6e6e73;
+        }
+        .timeline {
+            margin: 40px 0;
+        }
+        .timeline-item {
+            margin: 30px 0;
+            padding-left: 20px;
+            border-left: 2px solid #0071e3;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #0071e3;
+            border-radius: 50%;
+            left: -4px;
+            top: 6px;
+        }
+        .timeline-date {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0071e3;
+            margin-bottom: 5px;
+        }
+        .timeline-content {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .timeline-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0 0 10px;
+        }
+        .faq-item {
+            margin: 30px 0;
+        }
+        .faq-item h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0071e3;
+            margin: 0;
+        }
+        .faq-item p {
+            margin: 10px 0 0;
+            color: #6e6e73;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #86868b;
+            font-size: 14px;
+            font-weight: 300;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>The Future of Tech</h1>
+        <p>A Journey Lit by Curiosity, Shaped by Dreams, and Powered by Human Hope</p>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>The Evolution of Technology</h2>
+            <p>Technology has progressed alongside human ingenuity, from rudimentary tools to advanced artificial intelligence. This journey reflects our curiosity and ambition to understand and shape the world.</p>
+
+            <h2>AI Milestones Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1950</div>
+                    <div class="timeline-content">
+                        <h3>Turing Test Proposed</h3>
+                        <p>Alan Turing publishes "Computing Machinery and Intelligence," proposing a test to evaluate a machine's ability to exhibit intelligent behavior equivalent to a human (Wikipedia: Turing Test).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1956</div>
+                    <div class="timeline-content">
+                        <h3>Birth of AI</h3>
+                        <p>The Dartmouth Conference, organized by John McCarthy and Marvin Minsky, marks the formal beginning of artificial intelligence as a field (Wikipedia: History of Artificial Intelligence).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1966</div>
+                    <div class="timeline-content">
+                        <h3>ELIZA Chatbot</h3>
+                        <p>Joseph Weizenbaum creates ELIZA, an early natural language processing program that simulates a psychotherapist, demonstrating AI’s potential in human-computer interaction (Wikipedia: ELIZA).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1997</div>
+                    <div class="timeline-content">
+                        <h3>Deep Blue Defeats Kasparov</h3>
+                        <p>IBM’s Deep Blue becomes the first computer to defeat world chess champion Garry Kasparov in a six-game match, showcasing AI’s strategic capabilities (Wikipedia: Deep Blue).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2011</div>
+                    <div class="timeline-content">
+                        <h3>Watson Wins Jeopardy!</h3>
+                        <p>IBM’s Watson defeats human champions on the quiz show Jeopardy!, highlighting advancements in natural language processing and question-answering systems (Wikipedia: Watson).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2016</div>
+                    <div class="timeline-content">
+                        <h3>AlphaGo’s Breakthrough</h3>
+                        <p>Google DeepMind’s AlphaGo defeats Go world champion Lee Sedol, mastering a game with more possible moves than atoms in the observable universe (Wikipedia: AlphaGo).</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>The Future of Technology</h2>
+            <p>The future of tech holds promise in areas like quantum computing, autonomous systems, and sustainable energy solutions. Artificial intelligence is expected to further integrate into daily life, enhancing healthcare, education, and environmental efforts.</p>
+
+            <div class="chart-container">
+                <canvas id="techChart"></canvas>
+            </div>
+            <p><em>Projected Global AI Market Growth (2025-2035, in Billions USD)</em></p>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <h3>Will AI surpass human intelligence?</h3>
+                    <p>Some predict artificial general intelligence (AGI) could emerge by mid-century, but it remains speculative. Current AI excels in narrow tasks (Wikipedia: Artificial General Intelligence).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How will AI impact jobs?</h3>
+                    <p>AI may automate routine tasks, but it’s also expected to create new industries and roles, much like the Industrial Revolution (Wikipedia: Technological Unemployment).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What are the risks of AI?</h3>
+                    <p>Risks include ethical concerns, bias in algorithms, and potential misuse in areas like surveillance or warfare (Wikipedia: Ethics of Artificial Intelligence).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can tech solve climate change?</h3>
+                    <p>Technologies like AI-driven climate modeling and renewable energy innovations are key tools in mitigating environmental challenges (Wikipedia: Green Technology).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 | A Glimpse into the Future of Technology</p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('techChart').getContext('2d');
+        const techChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2025', '2027', '2029', '2031', '2033', '2035'],
+                datasets: [{
+                    label: 'AI Market Size (Billions USD)',
+                    data: [200, 350, 500, 700, 950, 1200],
+                    backgroundColor: 'rgba(0, 113, 227, 0.1)',
+                    borderColor: '#0071e3',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #f5f5f5;
+            color: #1d1d1f;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #000000, #1d1d1f);
+            color: #ffffff;
+            position: relative;
+        }
+        header h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        header p {
+            font-size: 24px;
+            font-weight: 300;
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+        .content {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-top: -40px;
+        }
+        h2 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin-top: 40px;
+            padding-bottom: 10px;
+        }
+        p {
+            font-size: 17px;
+            font-weight: 400;
+            color: #6e6e73;
+        }
+        .timeline {
+            margin: 40px 0;
+        }
+        .timeline-item {
+            margin: 30px 0;
+            padding-left: 20px;
+            border-left: 2px solid #0071e3;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #0071e3;
+            border-radius: 50%;
+            left: -4px;
+            top: 6px;
+        }
+        .timeline-date {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0071e3;
+            margin-bottom: 5px;
+        }
+        .timeline-content {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 12px;
+        }
+        .timeline-content h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1d1d1f;
+            margin: 0 0 10px;
+        }
+        .faq-item {
+            margin: 30px 0;
+        }
+        .faq-item h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #0071e3;
+            margin: 0;
+        }
+        .faq-item p {
+            margin: 10px 0 0;
+            color: #6e6e73;
+        }
+        .chart-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #86868b;
+            font-size: 14px;
+            font-weight: 300;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <h1>The Future of Tech</h1>
+        <p>A Journey Lit by Curiosity, Shaped by Dreams, and Powered by Human Hope</p>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <h2>The Evolution of Technology</h2>
+            <p>Technology has progressed alongside human ingenuity, from rudimentary tools to advanced artificial intelligence. This journey reflects our curiosity and ambition to understand and shape the world.</p>
+
+            <h2>AI Milestones Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">1950</div>
+                    <div class="timeline-content">
+                        <h3>Turing Test Proposed</h3>
+                        <p>Alan Turing publishes "Computing Machinery and Intelligence," proposing a test to evaluate a machine's ability to exhibit intelligent behavior equivalent to a human (Wikipedia: Turing Test).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1956</div>
+                    <div class="timeline-content">
+                        <h3>Birth of AI</h3>
+                        <p>The Dartmouth Conference, organized by John McCarthy and Marvin Minsky, marks the formal beginning of artificial intelligence as a field (Wikipedia: History of Artificial Intelligence).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1966</div>
+                    <div class="timeline-content">
+                        <h3>ELIZA Chatbot</h3>
+                        <p>Joseph Weizenbaum creates ELIZA, an early natural language processing program that simulates a psychotherapist, demonstrating AI’s potential in human-computer interaction (Wikipedia: ELIZA).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">1997</div>
+                    <div class="timeline-content">
+                        <h3>Deep Blue Defeats Kasparov</h3>
+                        <p>IBM’s Deep Blue becomes the first computer to defeat world chess champion Garry Kasparov in a six-game match, showcasing AI’s strategic capabilities (Wikipedia: Deep Blue).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2011</div>
+                    <div class="timeline-content">
+                        <h3>Watson Wins Jeopardy!</h3>
+                        <p>IBM’s Watson defeats human champions on the quiz show Jeopardy!, highlighting advancements in natural language processing and question-answering systems (Wikipedia: Watson).</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-date">2016</div>
+                    <div class="timeline-content">
+                        <h3>AlphaGo’s Breakthrough</h3>
+                        <p>Google DeepMind’s AlphaGo defeats Go world champion Lee Sedol, mastering a game with more possible moves than atoms in the observable universe (Wikipedia: AlphaGo).</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2>The Future of Technology</h2>
+            <p>The future of tech holds promise in areas like quantum computing, autonomous systems, and sustainable energy solutions. Artificial intelligence is expected to further integrate into daily life, enhancing healthcare, education, and environmental efforts.</p>
+
+            <div class="chart-container">
+                <canvas id="techChart"></canvas>
+            </div>
+            <p><em>Projected Global AI Market Growth (2025-2035, in Billions USD)</em></p>
+
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq">
+                <div class="faq-item">
+                    <h3>Will AI surpass human intelligence?</h3>
+                    <p>Some predict artificial general intelligence (AGI) could emerge by mid-century, but it remains speculative. Current AI excels in narrow tasks (Wikipedia: Artificial General Intelligence).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>How will AI impact jobs?</h3>
+                    <p>AI may automate routine tasks, but it’s also expected to create new industries and roles, much like the Industrial Revolution (Wikipedia: Technological Unemployment).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>What are the risks of AI?</h3>
+                    <p>Risks include ethical concerns, bias in algorithms, and potential misuse in areas like surveillance or warfare (Wikipedia: Ethics of Artificial Intelligence).</p>
+                </div>
+                <div class="faq-item">
+                    <h3>Can tech solve climate change?</h3>
+                    <p>Technologies like AI-driven climate modeling and renewable energy innovations are key tools in mitigating environmental challenges (Wikipedia: Green Technology).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 | A Glimpse into the Future of Technology</p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('techChart').getContext('2d');
+        const techChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2025', '2027', '2029', '2031', '2033', '2035'],
+                datasets: [{
+                    label: 'AI Market Size (Billions USD)',
+                    data: [200, 350, 500, 700, 950, 1200],
+                    backgroundColor: 'rgba(0, 113, 227, 0.1)',
+                    borderColor: '#0071e3',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
