@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAT - Real American Technologies</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- AOS CSS CDN -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .nav-slide {
+            transform: translateY(-100%);
+            transition: transform 0.4s ease-in-out;
+        }
+        .nav-slide-active {
+            transform: translateY(0);
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .button-hover {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .button-hover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s ease, height 0.5s ease;
+            z-index: -1;
+        }
+        .button-hover:hover::after {
+            width: 300px;
+            height: 300px;
+        }
+        .button-hover:hover {
+            transform: translateY(-2px);
+            background-color: #111827;
+        }
+        .form-input-focus {
+            transition: all 0.3s ease;
+        }
+        .form-input-focus:focus {
+            border-color: #1f2937;
+            box-shadow: 0 0 0 4px rgba(31, 41, 55, 0.1);
+            outline: none;
+        }
+        .process-step {
+            position: relative;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .process-step:hover {
+            transform: translateY(-5px);
+        }
+        .process-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #111827;
+            transition: width 0.5s ease;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+        @media (max-width: 768px) {
+            .button-hover {
+                padding: 0.75rem 1.5rem;
+            }
+            .hero-bg::before {
+                display: none;
+            }
+            .process-line {
+                display: none; /* Hide line on mobile for simplicity */
+            }
+        }
+    </style>
+</head>
+<body class="text-gray-900 bg-white antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white border-b border-gray-200 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold tracking-tight text-gray-900">RAT</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#home" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Home</a>
+                    <a href="#services" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Services</a>
+                    <a href="#features" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Features</a>
+                    <a href="#process" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Our Process</a>
+                    <a href="#about" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">About</a>
+                    <a href="#contact" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Contact</a>
+                    <a href="#blog" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Blog</a>
+                    <a href="https://example.com" target="_blank" class="text-sm font-medium text-gray-700 hover:text-gray-900 transition">Destiny</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="menu-btn" class="focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl text-gray-700"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden fixed inset-x-0 top-0 bg-white nav-slide shadow-lg">
+            <div class="p-4 flex justify-end">
+                <button id="close-btn" class="focus:outline-none">
+                    <i class="fas fa-times text-xl text-gray-700"></i>
+                </button>
+            </div>
+            <div class="flex flex-col items-center space-y-6 py-6">
+                <a href="#home" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Home</a>
+                <a href="#services" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Services</a>
+                <a href="#features" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Features</a>
+                <a href="#process" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Our Process</a>
+                <a href="#about" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">About</a>
+                <a href="#contact" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Contact</a>
+                <a href="#blog" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Blog</a>
+                <a href="https://example.com" target="_blank" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition">Destiny</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 hero-bg relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6 text-gray-900">
+                <span class="block">Unleash Your</span>
+                <span id="typed-text" class="block text-gray-800"></span>
+            </h1>
+            <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8 text-gray-700">
+                Crafting cutting-edge digital solutions that redefine innovation and elevate your vision.
+            </p>
+            <div class="flex justify-center space-x-6">
+                <a href="#contact" class="inline-block bg-gray-900 text-white px-8 py-4 rounded-full button-hover font-medium">Get Started</a>
+                <a href="#services" class="inline-block border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full button-hover font-medium">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">What We Do</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div data-aos="fade-up" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-code text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                    <p class="text-gray-600">Custom, responsive websites built with the latest technologies for seamless user experiences.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-mobile-alt text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">App Development</h3>
+                    <p class="text-gray-600">Native and cross-platform apps designed for performance and user engagement.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-lightbulb text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Digital Solutions</h3>
+                    <p class="text-gray-600">Tailored strategies to enhance your digital presence and solve business challenges.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-comments text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Consultation</h3>
+                    <p class="text-gray-600">Expert advice to bring your vision to life with precision and creativity.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-graduation-cap text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Students Management System</h3>
+                    <p class="text-gray-600">Efficient systems to manage student data, attendance, and academic progress.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="500" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-shield-alt text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">PCI Programming</h3>
+                    <p class="text-gray-600">Secure programming for payment card industry compliance and transactions.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="600" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-microchip text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Hardware Programming</h3>
+                    <p class="text-gray-600">Expertise in embedded systems and hardware-level software development.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="700" class="p-6 bg-white rounded-xl card-hover">
+                    <i class="fas fa-robot text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Automation</h3>
+                    <p class="text-gray-600">Automated solutions to streamline processes and boost efficiency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Why Choose Us</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div data-aos="fade-up" class="p-8 bg-gray-50 rounded-xl text-center">
+                    <i class="fas fa-bolt text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Speed</h3>
+                    <p class="text-gray-600">Fast delivery without compromising quality.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="p-8 bg-gray-50 rounded-xl text-center">
+                    <i class="fas fa-paint-brush text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Design</h3>
+                    <p class="text-gray-600">Beautiful, intuitive interfaces that captivate.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="p-8 bg-gray-50 rounded-xl text-center">
+                    <i class="fas fa-rocket text-4xl mb-4 text-gray-800"></i>
+                    <h3 class="text-xl font-semibold mb-2">Innovation</h3>
+                    <p class="text-gray-600">Pushing boundaries with groundbreaking ideas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Process Section -->
+    <section id="process" class="py-24 bg-gray-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Our Creative Process</h2>
+            <div class="relative">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div data-aos="fade-up" class="process-step" id="step1">
+                        <span class="block text-5xl font-bold text-gray-800 mb-4">01</span>
+                        <h3 class="text-xl font-semibold mb-2">Discover</h3>
+                        <p class="text-gray-600">We dive deep into your vision and goals.</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="100" class="process-step" id="step2">
+                        <span class="block text-5xl font-bold text-gray-800 mb-4">02</span>
+                        <h3 class="text-xl font-semibold mb-2">Design</h3>
+                        <p class="text-gray-600">Crafting stunning, user-focused solutions.</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="200" class="process-step" id="step3">
+                        <span class="block text-5xl font-bold text-gray-800 mb-4">03</span>
+                        <h3 class="text-xl font-semibold mb-2">Develop</h3>
+                        <p class="text-gray-600">Building with precision and passion.</p>
+                    </div>
+                    <div data-aos="fade-up" data-aos-delay="300" class="process-step" id="step4">
+                        <span class="block text-5xl font-bold text-gray-800 mb-4">04</span>
+                        <h3 class="text-xl font-semibold mb-2">Deploy</h3>
+                        <p class="text-gray-600">Launching your project to the world.</p>
+                    </div>
+                </div>
+                <div class="process-line" id="process-line"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Who We Are</h2>
+            <div data-aos="fade-up" class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg text-gray-700 mb-6">
+                        Real American Technologies (RAT) is a forward-thinking collective dedicated to shaping the future through technology. In just over a year, we’ve blended creativity and expertise to deliver transformative digital experiences.
+                    </p>
+                    <p class="text-lg text-gray-700">
+                        Our mission? To empower your ideas with solutions that inspire, innovate, and endure.
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="p-6 bg-gray-50 rounded-xl text-center">
+                        <span class="text-4xl font-bold text-gray-900">50+</span>
+                        <p class="text-gray-600">Projects Launched</p>
+                    </div>
+                    <div class="p-6 bg-gray-50 rounded-xl text-center">
+                        <span class="text-4xl font-bold text-gray-900">1+</span>
+                        <p class="text-gray-600">Years of Impact</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Innovation Hub Section -->
+    <section id="innovation" class="py-24 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Innovation Hub</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div data-aos="fade-up" class="p-6 bg-gray-800 rounded-xl card-hover">
+                    <i class="fas fa-lightbulb text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Idea Incubator</h3>
+                    <p>Where your boldest concepts take shape with expert guidance.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="p-6 bg-gray-800 rounded-xl card-hover">
+                    <i class="fas fa-flask text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Tech Lab</h3>
+                    <p>Experimenting with the latest tools to push boundaries.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="p-6 bg-gray-800 rounded-xl card-hover">
+                    <i class="fas fa-globe text-4xl mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Global Vision</h3>
+                    <p>Connecting local innovation to worldwide impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Let’s Collaborate</h2>
+            <div data-aos="fade-up" class="max-w-2xl mx-auto">
+                <form id="contact-form" class="space-y-6 bg-white p-8 rounded-xl shadow-lg">
+                    <div>
+                        <input type="text" name="data[Name]" placeholder="Your Name" class="w-full p-4 border border-gray-300 rounded-lg form-input-focus" required>
+                    </div>
+                    <div>
+                        <input type="email" name="data[Email]" placeholder="Your Email" class="w-full p-4 border border-gray-300 rounded-lg form-input-focus" required>
+                    </div>
+                    <div>
+                        <textarea name="data[Message]" placeholder="Tell us about your project" class="w-full p-4 border border-gray-300 rounded-lg h-40 form-input-focus" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-gray-900 text-white p-4 rounded-lg button-hover font-medium">Send Message</button>
+                    <p id="form-message" class="text-center text-gray-600 hidden"></p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Preview Section -->
+    <section id="blog" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gray-900">Insights & Updates</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div data-aos="fade-up" class="bg-white rounded-xl card-hover overflow-hidden">
+                    <img src="https://images.pexels.com/photos/6153743/pexels-photo-6153743.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Blog 1" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">The Future of Tech</h3>
+                        <p class="text-gray-600">The future is calling — a place where technology grows with us, not above us. It’s a journey lit by curiosity, shaped by dreams, and powered by human hope.</p>
+                        <a href="blogs/FutureofTech.html" class="text-gray-900 hover:underline mt-2 inline-block font-medium">Read More</a>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white rounded-xl card-hover overflow-hidden">
+                    <img src="https://img.freepik.com/premium-photo/automation-technology-process-businessman-is-pressing-virtual-screen_1085052-476.jpg?w=826" alt="Blog 2" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Automation Unleashed</h3>
+                        <p class="text-gray-600">Automation is opening doors to a future of endless possibilities — where humans dream bigger, and machines help bring those dreams to life.</p>
+                        <a href="blogs/AutomationUnleashed.html" class="text-gray-900 hover:underline mt-2 inline-block font-medium">Read More</a>
+                    </div>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white rounded-xl card-hover overflow-hidden">
+                    <img src="https://img.freepik.com/premium-photo/future-artificial-intelligence-robot-cyborg_31965-5166.jpg?w=1060" alt="Blog 3" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Ai Dreams</h3>
+                        <p class="text-gray-600">Imagining a future where machines think, create, and dream like humans. A blend of tech and imagination.</p>
+                        <a href="blogs/AiDreams.html" class="text-gray-900 hover:underline mt-2 inline-block font-medium">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <span class="text-2xl font-bold">RAT</span>
+                    <p class="mt-4 text-gray-400 text-sm">Real American Technologies<br>Shaping the future, today.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-lg">Navigate</h4>
+                    <a href="#home" class="block text-gray-400 hover:text-white text-sm transition">Home</a>
+                    <a href="#services" class="block text-gray-400 hover:text-white text-sm transition">Services</a>
+                    <a href="#features" class="block text-gray-400 hover:text-white text-sm transition">Features</a>
+                    <a href="#process" class="block text-gray-400 hover:text-white text-sm transition">Our Process</a>
+                    <a href="#about" class="block text-gray-400 hover:text-white text-sm transition">About</a>
+                    <a href="#contact" class="block text-gray-400 hover:text-white text-sm transition">Contact</a>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-lg">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter text-lg"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-github text-lg"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 text-lg">External</h4>
+                    <a href="https://example.com" target="_blank" class="block text-gray-400 hover:text-white text-sm transition">Resources</a>
+                    <a href="#" class="block text-gray-400 hover:text-white text-sm transition">Support</a>
+                </div>
+            </div>
+            <div class="mt-12 text-center text-gray-400 text-sm">
+                <p>© 2025 Real American Technologies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
+            setTimeout(() => mobileMenu.classList.add('nav-slide-active'), 10);
+        });
+
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('nav-slide-active');
+            setTimeout(() => mobileMenu.classList.add('hidden'), 400);
+        });
+
+        var typed = new Typed('#typed-text', {
+            strings: ['Potential.', 'Innovation.', 'Future.'],
+            typeSpeed: 60,
+            backSpeed: 30,
+            loop: true,
+            backDelay: 1500
+        });
+
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out'
+        });
+
+        // Scroll-based process line progress
+        const processLine = document.getElementById('process-line');
+        const steps = document.querySelectorAll('.process-step');
+
+        function updateProcessLine() {
+            steps.forEach((step, index) => {
+                const rect = step.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top >= 0 && rect.top < windowHeight * 0.75) {
+                    const progress = (index + 1) / steps.length;
+                    processLine.style.width = `${progress * 100}%`;
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateProcessLine);
+        window.addEventListener('resize', updateProcessLine);
+        updateProcessLine(); // Initial call
+
+        // Form submission to SheetDB
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formMessage = document.getElementById('form-message');
+
+            fetch('https://sheetdb.io/api/v1/6ssx808ka90fz', {
+                method: 'POST',
+                body: new FormData(form),
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.created) {
+                    formMessage.classList.remove('hidden');
+                    formMessage.classList.remove('text-red-600');
+                    formMessage.classList.add('text-green-600');
+                    formMessage.textContent = 'Message sent successfully!';
+                    form.reset();
+                    setTimeout(() => formMessage.classList.add('hidden'), 3000);
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                formMessage.classList.remove('hidden');
+                formMessage.classList.remove('text-green-600');
+                formMessage.classList.add('text-red-600');
+                formMessage.textContent = 'Error sending message. Please try again.';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
